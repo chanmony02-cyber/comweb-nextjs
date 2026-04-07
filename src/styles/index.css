@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy: theme("colors.brand.navy");
+    --primary-blue: theme("colors.brand.blue");
+    --sky-accent: theme("colors.brand.sky");
+
+    --background: 0 0% 100%;
+    --foreground: var(--navy);
+
+    --card: 0 0% 100%;
+    --card-foreground: var(--navy);
+
+    --popover: 0 0% 100%;
+    --popover-foreground: var(--navy);
+
+    --primary: var(--navy);
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: var(--sky-accent);
+    --secondary-foreground: var(--navy);
+
+    --muted: 212 60% 95%;
+    --muted-foreground: 219 30% 46%;
+
+    --accent: var(--primary-blue);
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 212 30% 88%;
+    --input: 212 30% 88%;
+    --ring: var(--primary-blue);
+
+    --radius: 0.5rem;
+
+    /* Custom tokens */
+    --topbar-bg: var(--navy);
+    --topbar-foreground: var(--sky-accent);
+    --nav-height: 4.5rem;
+    --topbar-height: 2.75rem;
+    --hero-gradient: linear-gradient(
+      135deg,
+      hsl(219 100% 11%) 0%,
+      hsl(206 67% 50%) 100%
+    );
+    --section-alt: 212 60% 97%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: var(--navy);
+    --sidebar-primary: var(--navy);
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 212 60% 95%;
+    --sidebar-accent-foreground: var(--navy);
+    --sidebar-border: 212 30% 88%;
+    --sidebar-ring: var(--primary-blue);
+  }
+
+  .dark {
+    --background: 219 100% 5%;
+    --foreground: var(--sky-accent);
+    --card: 219 100% 8%;
+    --card-foreground: var(--sky-accent);
+    --popover: 219 100% 8%;
+    --popover-foreground: var(--sky-accent);
+    --primary: var(--primary-blue);
+    --primary-foreground: 0 0% 100%;
+    --secondary: 219 80% 16%;
+    --secondary-foreground: var(--sky-accent);
+    --muted: 219 80% 16%;
+    --muted-foreground: 212 40% 60%;
+    --accent: var(--navy);
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 219 60% 18%;
+    --input: 219 60% 18%;
+    --ring: var(--primary-blue);
+    --topbar-bg: 219 100% 4%;
+    --topbar-foreground: 212 60% 70%;
+    --section-alt: 219 100% 7%;
+    --sidebar-background: 219 100% 8%;
+    --sidebar-foreground: var(--sky-accent);
+    --sidebar-primary: var(--primary-blue);
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 219 80% 16%;
+    --sidebar-accent-foreground: var(--sky-accent);
+    --sidebar-border: 219 60% 18%;
+    --sidebar-ring: var(--primary-blue);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* For mobile screen or ipad*/
+@media (max-width: 1280px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

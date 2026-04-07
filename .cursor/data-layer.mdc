@@ -1,0 +1,97 @@
+---
+description: Rules for the data layer - all static data must live in src/data/
+globs:
+  - "src/data/**"
+  - "src/components/**/*.jsx"
+  - "src/pages/**/*.jsx"
+---
+
+# Data Layer Rules
+
+## Golden Rule
+
+**No data arrays or objects belong inside component files.**
+If you write `const products = [...]` inside a `.jsx` file, stop and move it to `src/data/`.
+
+## Data Files Registry
+
+| File                                                  | Extension | Contents                                                              |
+| ----------------------------------------------------- | --------- | --------------------------------------------------------------------- |
+| `src/data/products/products.js`                       | `.js`     | Product list (id: number, name, category, image, description, specs)  |
+| `src/data/electricalEquipment/electricalEquipment.js` | `.js`     | Electrical equipment categories and page content                      |
+| `src/data/featuredProducts/featuredProducts.js`       | `.js`     | Featured products list (id, image, title, description, href)          |
+| `src/data/heroSlides/heroSlides.js`                   | `.js`     | Hero carousel slides                                                  |
+| `src/data/industries/industries.js`                   | `.js`     | Industry solutions list                                               |
+| `src/data/projects/projects.js`                       | `.js`     | Recent projects list                                                  |
+| `src/data/partners/partners.js`                       | `.js`     | Partnership logos and descriptions                                    |
+| `src/data/navigation/navigation.js`                   | `.js`     | Navbar links and dropdown structure                                   |
+| `src/data/services.jsx`                               | `.jsx`    | Services list - uses `.jsx` because entries contain inline SVG icons  |
+| `src/data/languages/languages.jsx`                    | `.jsx`    | Languages list - uses `.jsx` because entries contain inline SVG flags |
+| `src/data/notFound/notFound.js`                       | `.js`     | 404 copy                                                              |
+
+## Data File Format
+
+```js
+// src/data/products/products.js
+export const products = [
+  {
+    id: 1, // number and no duplicate
+    name: "Smart-Energy Meter",
+    category: "LV", // 'LV' | 'MV'
+    image: "/assets/images/products/smart-energy-meter.jpg",
+    description: "Advanced smart energy meters...",
+    specs: {
+      accuracy: "Class 0.5S",
+      communication: "4G/LoRa",
+    },
+  },
+];
+```
+
+## Usage Pattern in Components
+
+```jsx
+// Correct - import from data layer
+import { products } from '@/data/products/products';
+
+export function ProductGrid({ category = 'All' }) {
+  const filtered = category === 'All'
+    ? products
+    : products.filter(p => p.category === category);
+
+  return (
+    <div className="grid grid-cols-4 gap-6">
+      {filtered.map(product => (
+        <ProductCard key={product.id} {...product} />
+      ))}
+    </div>
+  );
+}
+
+// Wrong - never define data inside a component
+export function ProductGrid() {
+  const products = [
+    { name: 'Smart Meter', ... },  // <- Move this to src/data/products/products.js
+  ];
+}
+```
+
+## siteConfig.js - Global Site Constants
+
+All site-level constants live in `src/config/siteConfig.js`:
+
+- Company name
+- Phone number
+- Email address
+- Physical address
+- Social media URLs
+- Copyright text
+
+```jsx
+// Correct
+import { siteConfig } from '@/config/siteConfig';
+<a href={`tel:${siteConfig.phone}`}>{siteConfig.phone}</a>
+
+// Wrong - never hardcode contact info
+<a href="tel:+18555XXXXXXX">+(855) XXX XXX XXX</a>
+```

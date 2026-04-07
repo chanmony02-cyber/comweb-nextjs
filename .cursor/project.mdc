@@ -1,0 +1,118 @@
+---
+description: Core project rules for the Next.js company website
+alwaysApply: true
+---
+
+# Project Rules
+
+## Stack
+
+- Use Next.js App Router.
+- Use JavaScript and JSX only.
+- Do not introduce TypeScript, `.tsx`, or React Router.
+- Use Tailwind CSS for styling.
+- Use `next/link`, `next/image`, and `next/navigation` where appropriate.
+
+## App Structure
+
+- `src/app` contains route files, metadata, and route-level composition.
+- `src/screens` contains feature and page composition for each route.
+- `src/components/ui` contains reusable UI primitives.
+- `src/components/common` contains shared app shell pieces such as the navbar and footer.
+- `src/data` contains static content and list data.
+- `src/services` contains pure getter/helper functions for data access and filtering.
+- `src/layouts` contains shared layout wrappers.
+
+## Component Rules
+
+- Default to server components.
+- Add `"use client"` only when a component needs hooks, browser APIs, event handlers, or local state.
+- Keep the client boundary as small as possible.
+- Do not add `"use client"` to a file unless it is truly required.
+- Prefer named exports for reusable components.
+- Prefer default exports for route-level page components.
+
+## Reuse Rules
+
+- Check existing shared UI before creating a new component.
+- Reuse existing primitives such as `SectionHeader`, `BackButton`, `ProductCard`, `GetInTouchForm`, `GetInTouchSection`, and `FAQAccordion` when they fit.
+- Do not duplicate navbar or footer markup inside pages.
+- `MainLayout` provides the shared shell; pages should not render `Navbar` or `Footer` directly.
+
+## Data Rules
+
+- Do not place reusable data arrays or objects inside component files.
+- Put products, projects, news, services, careers, navigation, and other content data in `src/data`.
+- Use `src/services` to read or filter data instead of repeating logic in screens.
+- Treat service functions as pure helpers.
+
+## Design Rules
+
+- Use Tailwind utility classes and project design tokens.
+- Do not hardcode raw hex colors in JSX when a token exists.
+- Use the existing font and color system from the project theme.
+- Keep the current visual language consistent when adding or refactoring sections.
+- Preserve existing animations and interactions when moving code around.
+
+### Page Spacing
+
+- Desktop pages should follow the existing `container` padding of `100px`.
+- On screens up to `1280px` wide, the container padding should reduce to `2rem` on the left and right.
+- Keep this spacing behavior consistent for tablet/iPad and mobile layouts unless the screen already defines a more specific section-level rule.
+- Do not introduce new page margin systems that fight the current container spacing.
+
+### Color Tokens
+
+- `navy` / `brand.navy`: `#001439` or `hsl(219 100% 11%)`
+- `primary-blue` / `brand.blue`: `#2A8CD5` or `hsl(206 67% 50%)`
+- `sky-accent` / `brand.sky`: `#9FCCFF` or `hsl(212 100% 81%)`
+- `background`: `hsl(0 0% 100%)`
+- `foreground`: `hsl(219 100% 11%)`
+- `muted`: `hsl(212 60% 95%)`
+- `muted-foreground`: `hsl(219 30% 46%)`
+- `border` / `input`: `hsl(212 30% 88%)`
+- `section-alt`: `hsl(212 60% 97%)`
+- In dark mode, keep using the semantic tokens from `src/styles/index.css` instead of hardcoding new values.
+
+### Font Tokens
+
+- `font-sans`: `Inter, system-ui, sans-serif`
+- `font-display`: `Segoe UI, system-ui, sans-serif`
+- Use `font-sans` for body text and `font-display` for headings or emphasis where the project already does so.
+- Keep utility text size usage consistent, including `text-md` where the project already uses it.
+
+### Text Size
+
+- Treat `text-md` as the default minimum text size for body copy in this project.
+- Use smaller text only for compact labels, metadata, helper text, or deliberate UI details that already match the existing design.
+- Do not drop below `text-md` for normal content unless the section already uses a smaller size intentionally.
+
+## Routing Rules
+
+- Route files in `src/app` should stay thin.
+- Let route files import and render screens from `src/screens`.
+- Use route params and metadata from the App Router patterns already in the project.
+- Prefer static generation when the page only depends on local data.
+
+## Quality Rules
+
+- Keep refactors behavior-preserving unless the user asks for a change.
+- If you move logic between server and client components, verify the page still builds and behaves the same.
+- Run a production build after significant structural changes.
+- Avoid unnecessary abstraction if the project already has a simple pattern.
+
+## Performance Rules
+
+- Always optimize for website performance when generating or refactoring code.
+- Prefer server components, static rendering, and data-driven composition whenever possible.
+- Keep client-side JavaScript as small as possible.
+- Use `next/image` for images, and avoid unnecessary large client-only components.
+- Defer or lazy-load heavy sections when the UX allows it.
+- Avoid extra rerenders, duplicate work, and unnecessary state.
+- Preserve existing animations, but keep them lightweight and purposeful.
+
+## Working Style
+
+- Use the existing folder structure and naming style already present in the repo.
+- Keep page composition readable and small.
+- Favor consistency over cleverness.
