@@ -1,30 +1,30 @@
 const BUBBLE_LAYOUT = [
   {
-    x: 7,
-    y: 19,
+    x: 45,
+    y: 33,
     size: "clamp(11.6rem, 14.4vw, 14rem)",
     labelLines: ["Enhancing", "System", "Reliability"],
     delay: "0ms",
     glow: "radial-gradient(circle at 50% 50%, rgba(92, 199, 255, 0.34), rgba(92, 199, 255, 0.12) 42%, transparent 72%)",
   },
   {
-    x: 46,
-    y: 10,
+    x: 60,
+    y: 25,
     size: "clamp(11.4rem, 14vw, 13.6rem)",
     labelLines: ["Improving", "Operational", "Efficiency"],
     delay: "180ms",
     glow: "radial-gradient(circle at 50% 50%, rgba(110, 216, 255, 0.3), rgba(110, 216, 255, 0.1) 42%, transparent 72%)",
   },
   {
-    x: 95,
-    y: 22,
+    x: 75,
+    y: 33,
     size: "clamp(11.6rem, 14.2vw, 13.8rem)",
     labelLines: ["Strengthening", "Resiliency"],
     delay: "360ms",
     glow: "radial-gradient(circle at 50% 50%, rgba(82, 190, 255, 0.3), rgba(82, 190, 255, 0.1) 42%, transparent 72%)",
   },
   {
-    x: 15,
+    x: 50,
     y: 81,
     size: "clamp(10.9rem, 13.5vw, 13.1rem)",
     labelLines: ["Ensuring", "Safety"],
@@ -32,7 +32,7 @@ const BUBBLE_LAYOUT = [
     glow: "radial-gradient(circle at 50% 50%, rgba(116, 178, 255, 0.24), rgba(116, 178, 255, 0.08) 42%, transparent 72%)",
   },
   {
-    x: 85,
+    x: 75,
     y: 80,
     size: "clamp(15rem, 18.4vw, 17.5rem)",
     labelLines: [
@@ -46,13 +46,34 @@ const BUBBLE_LAYOUT = [
 ];
 
 const CONNECTIONS = [
-  { nodes: [0, 1], bend: -1 },
-  { nodes: [1, 2], bend: 1 },
-  { nodes: [0, 3], bend: 1 },
-  { nodes: [1, 3], bend: -1 },
-  { nodes: [1, 4], bend: -1 },
-  { nodes: [2, 4], bend: 1 },
-  { nodes: [3, 4], bend: -1 },
+  {
+    path: "M 42 30 C 48 27, 54 26, 60 26",
+    runnerDurations: [5.5, 6.8],
+  },
+  {
+    path: "M 60 26 C 66 26, 71 29, 76 34",
+    runnerDurations: [5.95, 7.15],
+  },
+  {
+    path: "M 43 34 C 39 47, 40 64, 49 80",
+    runnerDurations: [6.4, 7.6],
+  },
+  {
+    path: "M 60 28 C 54 43, 49 62, 49 80",
+    runnerDurations: [6.85, 7.95],
+  },
+  {
+    path: "M 61 29 C 68 43, 73 61, 75 79",
+    runnerDurations: [7.3, 8.25],
+  },
+  {
+    path: "M 76 34 C 77 47, 77 63, 76 79",
+    runnerDurations: [7.75, 8.6],
+  },
+  {
+    path: "M 49 80 C 58 78, 67 78, 75 80",
+    runnerDurations: [8.2, 8.95],
+  },
 ];
 
 const MESH_LINES = [
@@ -84,21 +105,6 @@ const RING_SPARKLES = [
   { x: "89%", y: "32%", size: "0.18rem" },
 ];
 
-function getConnectionPath(from, to, bend) {
-  const dx = to.x - from.x;
-  const dy = to.y - from.y;
-  const length = Math.sqrt(dx * dx + dy * dy) || 1;
-  const offset = Math.min(12, length * 0.2) * bend;
-  const midX = (from.x + to.x) / 2;
-  const midY = (from.y + to.y) / 2;
-  const normalX = -dy / length;
-  const normalY = dx / length;
-  const controlX = midX + normalX * offset;
-  const controlY = midY + normalY * offset;
-
-  return `M ${from.x} ${from.y} Q ${controlX} ${controlY} ${to.x} ${to.y}`;
-}
-
 function BubbleLabel({ bubble, className = "" }) {
   return (
     <span className={className}>
@@ -109,6 +115,19 @@ function BubbleLabel({ bubble, className = "" }) {
         </span>
       ))}
     </span>
+  );
+}
+
+function MovingDot({ path, duration, color, radius, glowRadius }) {
+  return (
+    <g>
+      <circle r={glowRadius} fill={color} opacity="0.22">
+        <animateMotion dur={duration} repeatCount="indefinite" path={path} />
+      </circle>
+      <circle r={radius} fill={color} opacity="0.95">
+        <animateMotion dur={duration} repeatCount="indefinite" path={path} />
+      </circle>
+    </g>
   );
 }
 
@@ -227,153 +246,147 @@ export function BubbleConnectionSlide({ slide }) {
 
       <div className="relative z-10 flex h-full items-center">
         <div className="w-full max-w-7xl mx-auto px-6 py-10 md:px-16 lg:mx-[130px] lg:px-8">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div className="relative z-20 max-w-[540px]">
-              <p className="mb-3 text-sm tracking-[0.15em] text-sky-accent font-display md:text-base">
-                {slide.eyebrow}
-              </p>
-              <h1
-                className="mb-5 text-4xl font-bold leading-[1.05] text-primary-foreground font-display md:text-5xl lg:text-[3.25rem]"
-                style={{ whiteSpace: "pre-line" }}
-              >
-                {slide.title}
-              </h1>
-              <p className="mb-8 max-w-[470px] text-base leading-relaxed text-primary-foreground/85 font-sans md:text-[1.05rem]">
-                {slide.description}
-              </p>
-              <div className="flex flex-wrap gap-3">
-                {slide.buttons.map((btn) =>
-                  btn.variant === "primary" ? (
-                    <a
-                      key={btn.label}
-                      href={btn.href}
-                      className="inline-flex items-center justify-center rounded bg-primary-blue px-7 py-[11px] text-[0.95rem] font-semibold text-accent-foreground transition-colors duration-200 hover:bg-primary-blue/90 font-display"
-                    >
-                      {btn.label}
-                    </a>
-                  ) : (
-                    <a
-                      key={btn.label}
-                      href={btn.href}
-                      className="inline-flex items-center justify-center rounded border border-primary-foreground/65 px-7 py-[11px] text-[0.95rem] font-semibold text-primary-foreground transition-all duration-200 hover:border-primary-foreground hover:bg-primary-foreground/15 font-display"
-                    >
-                      {btn.label}
-                    </a>
-                  ),
-                )}
-              </div>
-            </div>
-
-            <div className="relative z-10 min-h-[390px] lg:min-h-[570px]">
-              <div className="hidden sm:block absolute inset-0 z-0">
-                <svg
-                  className="absolute inset-0 h-full w-full"
-                  viewBox="0 0 100 100"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                >
-                  <defs>
-                    <filter
-                      id="atom-connection-glow"
-                      x="-60%"
-                      y="-60%"
-                      width="220%"
-                      height="220%"
-                    >
-                      <feGaussianBlur stdDeviation="1.4" result="blur" />
-                      <feMerge>
-                        <feMergeNode in="blur" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  {CONNECTIONS.map(({ nodes: [start, end], bend }, index) => {
-                    const from = bubbles[start];
-                    const to = bubbles[end];
-                    if (!from || !to) return null;
-                    const path = getConnectionPath(from, to, bend);
-
-                    return (
-                      <g key={`${start}-${end}`}>
-                        <path
-                          d={path}
-                          fill="none"
-                          stroke="rgba(151, 230, 255, 0.12)"
-                          strokeWidth="1.4"
-                          strokeLinecap="round"
-                          filter="url(#atom-connection-glow)"
-                        />
-                        <path
-                          d={path}
-                          fill="none"
-                          stroke="rgba(90, 203, 255, 0.5)"
-                          strokeWidth="0.38"
-                          strokeLinecap="round"
-                        />
-                        <path
-                          d={path}
-                          fill="none"
-                          stroke="rgba(214, 130, 255, 0.42)"
-                          strokeWidth="0.22"
-                          strokeLinecap="round"
-                          strokeDasharray="1.5 2.8"
-                          className="animate-[orbitDash_10s_linear_infinite]"
-                        />
-                        <circle r="0.9" fill="rgba(169, 240, 255, 0.95)">
-                          <animateMotion
-                            dur={`${5.5 + index * 0.45}s`}
-                            repeatCount="indefinite"
-                            path={path}
-                          />
-                        </circle>
-                        <circle r="0.65" fill="rgba(233, 146, 255, 0.95)">
-                          <animateMotion
-                            dur={`${6.8 + index * 0.35}s`}
-                            repeatCount="indefinite"
-                            path={path}
-                          />
-                        </circle>
-                      </g>
-                    );
-                  })}
-                </svg>
-
-                {bubbles.map((bubble) => (
-                  <BubbleNode key={bubble.label} bubble={bubble} />
-                ))}
-              </div>
-
-              <div className="sm:hidden relative z-0 grid gap-4">
-                {bubbles.map((bubble) => (
-                  <div
-                    key={bubble.label}
-                    className="relative overflow-hidden rounded-[30px] border border-white/10 px-5 py-5 text-center text-primary-foreground shadow-[0_0_30px_rgba(42,140,213,0.12)] backdrop-blur-md"
-                    style={{
-                      background:
-                        "radial-gradient(circle_at_15%_18%, rgba(112,224,255,0.22), transparent 18%), radial-gradient(circle_at_86%_86%, rgba(208,124,255,0.18), transparent 24%), linear-gradient(160deg, rgba(8,25,56,0.9), rgba(5,16,34,0.86))",
-                    }}
+          <div className="relative z-20 max-w-[540px]">
+            <p className="mb-3 text-sm tracking-[0.15em] text-sky-accent font-display md:text-base">
+              {slide.eyebrow}
+            </p>
+            <h1
+              className="mb-5 text-4xl font-bold leading-[1.05] text-primary-foreground font-display md:text-5xl lg:text-[3.25rem]"
+              style={{ whiteSpace: "pre-line" }}
+            >
+              {slide.title}
+            </h1>
+            <p className="mb-8 max-w-[470px] text-base leading-relaxed text-primary-foreground/85 font-sans md:text-[1.05rem]">
+              {slide.description}
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {slide.buttons.map((btn) =>
+                btn.variant === "primary" ? (
+                  <a
+                    key={btn.label}
+                    href={btn.href}
+                    className="inline-flex items-center justify-center rounded bg-primary-blue px-7 py-[11px] text-[0.95rem] font-semibold text-accent-foreground transition-colors duration-200 hover:bg-primary-blue/90 font-display"
                   >
-                    <div
-                      className="absolute inset-0 opacity-90"
-                      style={{
-                        background:
-                          "conic-gradient(from 220deg, rgba(121,236,255,0.9), rgba(54,188,255,0.42), rgba(0,0,0,0) 45%, rgba(216,130,255,0.78) 75%, rgba(121,236,255,0.92) 100%)",
-                        WebkitMask:
-                          "radial-gradient(farthest-side, transparent calc(100% - 8px), #000 calc(100% - 6px))",
-                        mask: "radial-gradient(farthest-side, transparent calc(100% - 8px), #000 calc(100% - 6px))",
-                      }}
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center px-4 pointer-events-none">
-                      <div className="block max-w-[78%] text-center text-[1.08rem] font-semibold leading-[1.06] uppercase font-display whitespace-pre-line">
-                        <BubbleLabel bubble={bubble} />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                    {btn.label}
+                  </a>
+                ) : (
+                  <a
+                    key={btn.label}
+                    href={btn.href}
+                    className="inline-flex items-center justify-center rounded border border-primary-foreground/65 px-7 py-[11px] text-[0.95rem] font-semibold text-primary-foreground transition-all duration-200 hover:border-primary-foreground hover:bg-primary-foreground/15 font-display"
+                  >
+                    {btn.label}
+                  </a>
+                ),
+              )}
             </div>
           </div>
+
+          <div className="sm:hidden relative z-10 mt-8 grid gap-4">
+            {bubbles.map((bubble) => (
+              <div
+                key={bubble.label}
+                className="relative overflow-hidden rounded-[30px] border border-white/10 px-5 py-5 text-center text-primary-foreground shadow-[0_0_30px_rgba(42,140,213,0.12)] backdrop-blur-md"
+                style={{
+                  background:
+                    "radial-gradient(circle_at_15%_18%, rgba(112,224,255,0.22), transparent 18%), radial-gradient(circle_at_86%_86%, rgba(208,124,255,0.18), transparent 24%), linear-gradient(160deg, rgba(8,25,56,0.9), rgba(5,16,34,0.86))",
+                }}
+              >
+                <div
+                  className="absolute inset-0 opacity-90"
+                  style={{
+                    background:
+                      "conic-gradient(from 220deg, rgba(121,236,255,0.9), rgba(54,188,255,0.42), rgba(0,0,0,0) 45%, rgba(216,130,255,0.78) 75%, rgba(121,236,255,0.92) 100%)",
+                    WebkitMask:
+                      "radial-gradient(farthest-side, transparent calc(100% - 8px), #000 calc(100% - 6px))",
+                    mask: "radial-gradient(farthest-side, transparent calc(100% - 8px), #000 calc(100% - 6px))",
+                  }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center px-4 pointer-events-none">
+                  <div className="block max-w-[78%] text-center text-[1.08rem] font-semibold leading-[1.06] uppercase font-display whitespace-pre-line">
+                    <BubbleLabel bubble={bubble} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
+      </div>
+
+      <div className="hidden sm:block absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <svg
+          className="absolute inset-0 h-full w-full"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <defs>
+            <filter
+              id="atom-connection-glow"
+              x="-60%"
+              y="-60%"
+              width="220%"
+              height="220%"
+            >
+              <feGaussianBlur stdDeviation="1.4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          {CONNECTIONS.map(({ path, runnerDurations }, index) => {
+            return (
+              <g key={`${path}-${index}`}>
+                <path
+                  d={path}
+                  fill="none"
+                  stroke="rgba(151, 230, 255, 0.12)"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  filter="url(#atom-connection-glow)"
+                  vectorEffect="non-scaling-stroke"
+                />
+                <path
+                  d={path}
+                  fill="none"
+                  stroke="rgba(90, 203, 255, 0.5)"
+                  strokeWidth="0.38"
+                  strokeLinecap="round"
+                  vectorEffect="non-scaling-stroke"
+                />
+                <path
+                  d={path}
+                  fill="none"
+                  stroke="rgba(214, 130, 255, 0.42)"
+                  strokeWidth="0.22"
+                  strokeLinecap="round"
+                  strokeDasharray="1.5 2.8"
+                  className="animate-[orbitDash_10s_linear_infinite]"
+                  vectorEffect="non-scaling-stroke"
+                />
+                <MovingDot
+                  path={path}
+                  duration={`${runnerDurations[0]}s`}
+                  color="rgba(169, 240, 255, 0.98)"
+                  radius="0.6"
+                  glowRadius="1.3"
+                />
+                <MovingDot
+                  path={path}
+                  duration={`${runnerDurations[1]}s`}
+                  color="rgba(233, 146, 255, 0.98)"
+                  radius="0.5"
+                  glowRadius="1"
+                />
+              </g>
+            );
+          })}
+        </svg>
+
+        {bubbles.map((bubble) => (
+          <BubbleNode key={bubble.label} bubble={bubble} />
+        ))}
       </div>
 
       <style>{`
@@ -395,6 +408,11 @@ export function BubbleConnectionSlide({ slide }) {
         @keyframes sparkPulse {
           0%, 100% { opacity: 0.35; transform: scale(0.85); }
           50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        @keyframes runnerPulse {
+          0%, 100% { opacity: 0.85; transform: scale(0.95); }
+          50% { opacity: 1; transform: scale(1.08); }
         }
       `}</style>
     </div>
