@@ -228,7 +228,7 @@ export function BubbleConnectionSlide({ slide }) {
       <div className="relative z-10 flex h-full items-center">
         <div className="w-full max-w-7xl mx-auto px-6 py-10 md:px-16 lg:mx-[130px] lg:px-8">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div className="max-w-[540px]">
+            <div className="relative z-20 max-w-[540px]">
               <p className="mb-3 text-sm tracking-[0.15em] text-sky-accent font-display md:text-base">
                 {slide.eyebrow}
               </p>
@@ -264,8 +264,8 @@ export function BubbleConnectionSlide({ slide }) {
               </div>
             </div>
 
-            <div className="relative min-h-[390px] lg:min-h-[570px]">
-              <div className="hidden sm:block absolute inset-0">
+            <div className="relative z-10 min-h-[390px] lg:min-h-[570px]">
+              <div className="hidden sm:block absolute inset-0 z-0">
                 <svg
                   className="absolute inset-0 h-full w-full"
                   viewBox="0 0 100 100"
@@ -343,7 +343,7 @@ export function BubbleConnectionSlide({ slide }) {
                 ))}
               </div>
 
-              <div className="sm:hidden grid gap-4">
+              <div className="sm:hidden relative z-0 grid gap-4">
                 {bubbles.map((bubble) => (
                   <div
                     key={bubble.label}
