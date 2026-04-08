@@ -1,7 +1,6 @@
-﻿import { assetSrc } from "@/lib/assetSrc";
-const ictImg = "/images/logo/Institute_of_Technology_of_Cambodia_logo.png";
-const ruppImg = "/images/logo/RUPP_logo.png";
-const npicImg = "/images/logo/npic.jpg";
+import ictImg from "@/assets/images/logo/Institute_of_Technology_of_Cambodia_logo.png";
+import ruppImg from "@/assets/images/logo/RUPP_logo.png";
+import npicImg from "@/assets/images/logo/npic.jpg";
 
 export const partners = [
   {
@@ -10,7 +9,7 @@ export const partners = [
     description:
       "A community of thriving business in our region and represent our network.",
     color: "#001439",
-    image: assetSrc(ictImg),
+    image: ictImg,
     initials: "P1",
   },
   {
@@ -18,7 +17,7 @@ export const partners = [
     name: "RUPP",
     description: "A global network of thriving businesses for excellent expertise.",
     color: "#001439",
-    image: assetSrc(ruppImg),
+    image: ruppImg,
     initials: "P2",
   },
   {
@@ -26,7 +25,7 @@ export const partners = [
     name: "NPIC",
     description: "A community of thriving businesses and expands your network.",
     color: "#001439",
-    image: assetSrc(npicImg),
+    image: npicImg,
     initials: "P3",
   },
 ];

@@ -1,13 +1,12 @@
-﻿// src/data/services/consultants.js
-import { assetSrc } from "@/lib/assetSrc";
-const consultantHero = "/images/servicesImg/consultants/consultant-hero.webp";
-const consultantOverview = "/images/servicesImg/consultants/consultant-overview.webp";
+// src/data/services/consultants.js
+import consultantHero from "@/assets/images/servicesImg/consultants/consultant-hero.jpg";
+import consultantOverview from "@/assets/images/servicesImg/consultants/consultant-overview.jpg";
 
 export const consultantsData = {
   hero: {
     title: "Expert in Consultants",
     subtitle: "Explore our range of services tailored to meet your needs.",
-    heroImage: assetSrc(consultantHero),
+    heroImage: consultantHero,
   },
   overview: {
     title: "Comprehensive Consulting Service Overview",
@@ -15,7 +14,7 @@ export const consultantsData = {
       "Our consulting services encompass every aspect of electrical infrastructure planning and execution. From initial feasibility studies and system design to project management and commissioning, we guide organizations through complex technical decisions with clarity and confidence.",
       "Our multidisciplinary team brings together decades of field experience, ensuring that every recommendation is grounded in practical, real-world application.",
     ],
-    image: assetSrc(consultantOverview),
+    image: consultantOverview,
     bgSection: true,
   },
   expertise: {
@@ -104,5 +103,3 @@ export const consultantsData = {
     },
   ],
 };
-
-

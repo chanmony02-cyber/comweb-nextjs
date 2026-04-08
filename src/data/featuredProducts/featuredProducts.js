@@ -1,14 +1,13 @@
-﻿import { assetSrc } from "@/lib/assetSrc";
-const meterImg = "/images/products/meter/meter.webp";
+import meterImg from "@/assets/images/products/meter/meter.jpg";
 
 export const featuredProducts = [
   {
     id: 1,
-    image: assetSrc(meterImg),
+    image: meterImg,
     title: "Smart Electricity Meter",
     description:
       "Advanced digital metering solution for accurate energy consumption monitoring and remote data collection.",
-    href: "/products/1",
+    href: "/product-detail/1",
   },
   {
     id: 2,
@@ -17,7 +16,7 @@ export const featuredProducts = [
     title: "Control Panel Systems",
     description:
       "Industrial-grade control panels engineered to improve safety and optimize system performance.",
-    href: "/products/2",
+    href: "/product-detail/2",
   },
   {
     id: 3,
@@ -26,7 +25,7 @@ export const featuredProducts = [
     title: "Distribution Transformer",
     description:
       "High-efficiency distribution transformers designed for reliable power delivery to utility networks.",
-    href: "/products/3",
+    href: "/product-detail/3",
   },
 ];
 

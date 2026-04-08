@@ -1,0 +1,244 @@
+# ============================================================
+
+# SMART INFRASTRUCTURE WEBSITE — AI CODING RULES
+
+# Apply EVERY rule below on ALL tasks, ALL responses.
+
+# These rules are non-negotiable and override any defaults.
+
+# ============================================================
+
+# ── TECH STACK ───────────────────────────────────────────────
+
+- React 19 + JSX only. All component files use `.jsx` extension. NEVER `.tsx`.
+- Tailwind CSS for all styling. No per-component CSS files.
+- React Router v6 for all navigation.
+- Plain JavaScript only. No TypeScript — no `interface`, no `type`, no generics.
+
+# ── DESIGN TOKENS — NEVER HARDCODE COLORS ───────────────────
+
+- Navy : bg-navy / text-navy (NOT #001439)
+- Blue : bg-primary-blue / text-primary-blue (NOT #2A8CD5)
+- Sky : bg-sky-accent / text-sky-accent (NOT #9FCCFF)
+- Heading font : Segoe UI
+- Body font : Inter
+
+# ── FOLDER PLACEMENT DECISION TREE ──────────────────────────
+
+Before placing ANY file, run this tree:
+
+Used on 2+ UNRELATED pages?
+YES → src/components/ui/
+NO →
+Layout shell (Navbar, Footer, TopBar)?
+YES → src/components/common/[Name]/
+NO →
+Shared across 2+ pages in the SAME section?
+YES → src/pages/[SectionGroup]/components/
+NO → src/pages/[PageName]/components/
+
+# ── CANONICAL FOLDER MAP ─────────────────────────────────────
+
+src/
+├── components/
+│ ├── common/ # Navbar, Footer, TopBar, Button
+│ └── ui/ # Reusable across 2+ unrelated pages
+├── pages/ # One folder per page
+│ └── [PageName]/
+│ ├── [PageName].jsx
+│ ├── index.js
+│ └── components/
+├── layouts/ # MainLayout.jsx, AdminLayout.jsx
+├── data/ # ALL static data arrays — never in components
+├── hooks/ # useXxx.js
+├── config/ # routes.js, siteConfig.js
+├── services/ # api.js, contactService.js
+├── utils/ # formatDate.js, validators.js
+└── styles/ # index.css (Tailwind directives)
+
+# ── NAMING CONVENTIONS ───────────────────────────────────────
+
+- Component files → PascalCase.jsx (e.g. SectionHeader.jsx)
+- Data files → camelCase.js (use .jsx ONLY if file contains JSX/SVG)
+- Hook files → camelCase.js, prefixed with `use` (e.g. useScrollPosition.js)
+- Utility files → camelCase.js (e.g. formatDate.js)
+- Every page folder → MUST have index.js re-exporting the page default
+
+# ── COMPONENT EXPORT RULES ───────────────────────────────────
+
+- Shared / UI components → named export: `export function SectionHeader() {}`
+- Page components → default export: `export default function HomePage() {}`
+- NEVER mix these up.
+
+# ── IMPORT RULES ─────────────────────────────────────────────
+
+- ALWAYS use `@/` alias for any cross-folder import.
+- NEVER use deep relative paths like `../../../components/`.
+
+  ✅ import SectionHeader from '@/components/ui/SectionHeader';
+  ✅ import { products } from '@/data/products/products';
+  ✅ import { ROUTES } from '@/config/routes';
+
+  ❌ import SectionHeader from '../../../components/ui/SectionHeader';
+
+# ── STANDARD FILE IMPORT ORDER ───────────────────────────────
+
+1. React imports
+2. Third-party library imports
+3. Internal component imports (use @/ alias)
+4. Data imports
+
+# ── PAGE COMPONENT TEMPLATE ──────────────────────────────────
+
+Every page must follow this shell exactly:
+
+import MainLayout from '@/layouts/MainLayout';
+import GetInTouchForm from '@/components/ui/GetInTouchForm';
+// ... other shared + page-specific imports
+
+export default function PageName() {
+return (
+<MainLayout>
+<HeroSection />
+<ContentSection />
+<GetInTouchForm />
+</MainLayout>
+);
+}
+
+- ALWAYS wrap page in <MainLayout>. NEVER add <Navbar> or <Footer> inside a page.
+- ALWAYS create index.js: `export { default } from './PageName';`
+
+# ── ANTI-DUPLICATION — CHECK REGISTRY BEFORE WRITING ANY JSX ─
+
+Before writing ANY new component or JSX block, ask:
+
+1. Section with label + heading + subtitle? → USE SectionHeader
+2. Contact form? → USE GetInTouchForm
+3. Expandable FAQ list? → USE FAQAccordion
+4. Product card with image? → USE ProductCard
+5. Card with icon + title + description? → USE ServiceCard
+6. Detail/sub-page back link? → USE BackButton
+7. Row of stats/numbers? → USE StatsBar
+
+If the answer is YES to any — import the component, NEVER recreate it.
+
+## Shared Components Registry
+
+| Component      | Path                           | Props                                         |
+| -------------- | ------------------------------ | --------------------------------------------- |
+| SectionHeader  | @/components/ui/SectionHeader  | label, title, subtitle?, align? (def: center) |
+| GetInTouchForm | @/components/ui/GetInTouchForm | (none)                                        |
+| FAQAccordion   | @/components/ui/FAQAccordion   | items: { question, answer }[]                 |
+| ProductCard    | @/components/ui/ProductCard    | id, image, name, category, to                 |
+| ServiceCard    | @/components/ui/ServiceCard    | icon, title, description, href?               |
+| BackButton     | @/components/ui/BackButton     | (none)                                        |
+| StatsBar       | @/components/ui/StatsBar       | stats: { value, label }[]                     |
+
+# ── ROUTING RULES ────────────────────────────────────────────
+
+- ALL route path strings live in `src/config/routes.js` as named ROUTES constants.
+- NEVER hardcode a URL string in <Link to=""> or navigate().
+- ALL pages must be lazy-loaded in src/router.jsx.
+
+  ✅ <Link to={ROUTES.PRODUCTS}>View All</Link>
+  ✅ <Link to={ROUTES.PRODUCT_DETAIL.replace(':id', product.id)}>View</Link>
+  ❌ <Link to="/products">View All</Link>
+
+Adding a new page — always do ALL 3 steps:
+A. Add constant to src/config/routes.js
+B. Add lazy import + <Route> to src/router.jsx
+C. Create page folder with PageName.jsx + index.js + components/
+
+# ── DATA LAYER RULES ─────────────────────────────────────────
+
+- NO data arrays or objects inside component files.
+- If you write `const items = [...]` inside a .jsx file → STOP and move it to src/data/.
+- ALL static data belongs in src/data/ files.
+- Product IDs must be NUMBERS, not strings. e.g. `id: 1` NOT `id: 'smart-energy-meter'`
+
+Data files registry:
+src/data/products/products.js → id: number, name, category, image, description, specs
+src/data/ourProducts/...js → Product categories
+src/data/featuredProducts/featuredProducts.js
+src/data/heroSlides/heroSlides.js
+src/data/industries/industries.js
+src/data/projects/projects.js
+src/data/partners/partners.js
+src/data/navigation/navigation.js
+src/data/services.jsx → .jsx because entries contain inline SVG icons
+src/data/languages/languages.jsx → .jsx because entries contain inline SVG flags
+src/data/notFound/notFound.js
+
+## Site Constants — NEVER Hardcode
+
+Company name, phone, email, address, social links → import from `src/config/siteConfig.js`
+
+✅ import { siteConfig } from '@/config/siteConfig';
+<a href={`tel:${siteConfig.phone}`}>{siteConfig.phone}</a>
+
+❌ <a href="tel:+18555XXXXXXX">+(855) XXX XXX XXX</a>
+
+# ── TAILWIND CSS RULES ───────────────────────────────────────
+
+- Use Tailwind utility classes exclusively.
+- NO inline style={{}} — except for truly dynamic values Tailwind cannot express.
+- Use responsive prefixes: sm: md: lg: xl:
+- Use `text-md` or larger for all text. Do not use any text size below `text-md`.
+- Use design token classes from tailwind.config.js (e.g. text-navy, bg-primary-blue).
+- NEVER use arbitrary pixel values like w-[347px] for layout — use spacing scale.
+- Arbitrary values are acceptable only for specific image dimensions.
+
+# ── PROPS RULES ──────────────────────────────────────────────
+
+- Destructure at the function signature: `function Card({ title, image, href })`
+- Provide defaults for optional props: `function Card({ align = 'center' })`
+- NEVER hardcode content strings — they must come from props or src/data/.
+
+# ── HARD RULES TABLE — NEVER BREAK ──────────────────────────
+
+| Rule                    | Wrong                        | Correct                          |
+| ----------------------- | ---------------------------- | -------------------------------- |
+| HTML class attribute    | class="..."                  | className="..."                  |
+| TypeScript syntax       | interface Props, : string    | Plain JS only                    |
+| Per-component CSS       | import './Card.css'          | Tailwind classes only            |
+| React function type     | React.FC                     | Plain function                   |
+| Shared component export | export default SectionHeader | export function SectionHeader    |
+| Page component export   | export function HomePage     | export default function HomePage |
+| Navbar/Footer in pages  | <Navbar /> inside page       | Injected by MainLayout only      |
+| Hardcoded route strings | <Link to="/products">        | <Link to={ROUTES.PRODUCTS}>      |
+| Data in component files | const items = [...] in .jsx  | Import from src/data/            |
+| Hardcoded colors        | #001439 or #2A8CD5           | text-navy, bg-primary-blue       |
+| Hardcoded contact info  | "+1 855 XXX XXXX"            | siteConfig.phone                 |
+| Product ID as string    | id: 'smart-energy-meter'     | id: 1                            |
+
+# ── NEW PAGE CHECKLIST ───────────────────────────────────────
+
+When creating any new page, follow in order:
+
+[ ] Step 1 — Identify shared components to import (run anti-duplication checks above)
+[ ] Step 2 — Decide file placement using decision tree
+[ ] Step 3 — Create folder: PageName.jsx + index.js + components/
+[ ] Step 4 — Write index.js first
+[ ] Step 5 — Write page shell wrapped in <MainLayout>
+[ ] Step 6 — Write page-specific section components (named exports, data from src/data/)
+[ ] Step 7 — Register route in routes.js AND router.jsx
+[ ] Step 8 — Final sanity check:
+[ ] No <Navbar> or <Footer> inside the page
+[ ] No contact form markup rebuilt from scratch
+[ ] No section header rebuilt inline
+[ ] No data arrays defined inside any .jsx file
+[ ] All <Link> and navigate() calls use ROUTES constants
+[ ] All cross-folder imports use @/ alias
+[ ] Shared/UI components use named exports
+[ ] Page default export wrapped in <MainLayout>
+[ ] index.js exists in the page folder
+[ ] Route registered in both routes.js and router.jsx
+
+# Project Rules
+
+- Generate code that is optimized for performance, safety, security, and SEO.
+- Prefer simple, efficient implementations that avoid unnecessary re-renders, duplicate work, and wasted assets.
+- Validate and sanitize all user-facing input, avoid unsafe patterns, and never hardcode secrets or sensitive data.
+- Use semantic HTML, meaningful headings, descriptive alt text, accessible labels, and a crawlable page structure.
+- Keep changes maintainable, lint-friendly, and consistent with the existing codebase conventions.

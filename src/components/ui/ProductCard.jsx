@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const formatSpecLabel = (label) =>
   label
     .replace(/([A-Z])/g, " $1")
@@ -18,12 +16,10 @@ export function ProductCard({ image, name, category, description, specs }) {
             {category}
           </span>
         ) : null}
-        <Image
+        <img
           src={image}
           alt={name}
-          fill
-          className="z-0 object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 1280px) 100vw, 320px"
+          className="z-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
       </div>
       <div className="bg-navy text-white px-5 py-5 xl:py-7">

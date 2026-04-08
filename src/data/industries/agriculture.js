@@ -1,13 +1,12 @@
-﻿// src/data/industries/agriculture.js
-import { assetSrc } from "@/lib/assetSrc";
-const ai1 = "/images/industries/agriculture/solution1.webp";
-const ai2 = "/images/industries/agriculture/solution2.webp";
-const ai3 = "/images/industries/agriculture/solution3.webp";
-const as1 = "/images/industries/agriculture/solution1.webp";
-const as2 = "/images/industries/agriculture/solution2.webp";
-const as3 = "/images/industries/agriculture/solution3.webp";
-const aHero = "/images/industries/agriculture/agri-banner.webp";
-const aProblem = "/images/industries/agriculture/water.webp";
+// src/data/industries/agriculture.js
+import ai1 from "@/assets/images/industries/agriculture/solution1.jpg";
+import ai2 from "@/assets/images/industries/agriculture/solution2.jpg";
+import ai3 from "@/assets/images/industries/agriculture/solution3.jpg";
+import as1 from "@/assets/images/industries/agriculture/solution1.jpg";
+import as2 from "@/assets/images/industries/agriculture/solution2.jpg";
+import as3 from "@/assets/images/industries/agriculture/solution3.jpg";
+import aHero from "@/assets/images/industries/agriculture/agri-banner.jpg";
+import aProblem from "@/assets/images/industries/agriculture/water.jpg";
 import { ROUTES } from "@/config/routes";
 
 export const agricultureData = {
@@ -15,7 +14,7 @@ export const agricultureData = {
     title: "Agriculture",
     subtitle:
       "Empowering farming communities with smart energy and automation solutions that boost productivity and sustainability.",
-    backgroundImage: assetSrc(aHero),
+    backgroundImage: aHero,
   },
   problem: {
     title: "We Understand Your Problem.",
@@ -24,7 +23,7 @@ export const agricultureData = {
       "From remote field electrification to automated greenhouse control, agricultural operations require specialized electrical and automation expertise that understands both the technical and environmental demands of farming.",
       "We work alongside agricultural stakeholders to deliver energy-efficient, weather-resilient solutions — helping farms operate smarter, reduce costs, and increase yields across every season.",
     ],
-    image: assetSrc(aProblem),
+    image: aProblem,
   },
   solutions: {
     label: "INDUSTRY SOLUTIONS",
@@ -35,17 +34,17 @@ export const agricultureData = {
       {
         id: 1,
         title: "Solar-Powered Irrigation Systems",
-        image: assetSrc(ai1),
+        image: ai1,
       },
       {
         id: 2,
         title: "Rural Electrification Networks",
-        image: assetSrc(ai2),
+        image: ai2,
       },
       {
         id: 3,
         title: "Precision Agriculture Monitoring",
-        image: assetSrc(ai3),
+        image: ai3,
       },
     ],
   },
@@ -58,7 +57,7 @@ export const agricultureData = {
         title: "Rice Farm Electrification",
         description:
           "Deployed a complete rural power distribution network across 500 hectares of rice farmland, providing stable electricity to irrigation pumps and processing facilities year-round.",
-        image: assetSrc(as1),
+        image: as1,
         href: ROUTES.PROJECT_DETAIL.replace(":id", 7),
       },
       {
@@ -66,7 +65,7 @@ export const agricultureData = {
         title: "Irrigation Control System",
         description:
           "Installed a solar-powered smart irrigation system with automated scheduling and remote monitoring, reducing water consumption by 40% while maintaining optimal crop yields.",
-        image: assetSrc(as2),
+        image: as2,
         href: ROUTES.PROJECT_DETAIL.replace(":id", 8),
       },
       {
@@ -74,7 +73,7 @@ export const agricultureData = {
         title: "Greenhouse Automation Project",
         description:
           "Engineered the full electrical and control infrastructure for a large-scale greenhouse complex, including climate control, grow lighting, and integrated SCADA monitoring systems.",
-        image: assetSrc(as3),
+        image: as3,
         href: ROUTES.PROJECT_DETAIL.replace(":id", 9),
       },
     ],
@@ -85,5 +84,3 @@ export const agricultureData = {
       "Discover the advantages of partnering with us to modernize your infrastructure.",
   },
 };
-
-

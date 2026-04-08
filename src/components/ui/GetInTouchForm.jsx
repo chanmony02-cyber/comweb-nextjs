@@ -1,7 +1,3 @@
-"use client";
-
-"use client";
-
 // src/components/ui/GetInTouchForm.jsx
 
 import { useState } from "react";

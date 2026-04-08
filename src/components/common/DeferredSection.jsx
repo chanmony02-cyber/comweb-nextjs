@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useRef, useState } from "react";
 
 export function DeferredSection({
@@ -49,4 +47,3 @@ export function DeferredSection({
     </div>
   );
 }
-"use client";

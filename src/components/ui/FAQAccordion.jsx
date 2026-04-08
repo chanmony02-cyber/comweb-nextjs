@@ -1,7 +1,3 @@
-"use client";
-
-"use client";
-
 // src/components/ui/FAQAccordion.jsx
 
 import { useState } from "react";

@@ -1,7 +1,3 @@
-"use client";
-
-"use client";
-
 // src/components/ui/UnderMaintenanceAlert.jsx
 
 import { useEffect } from "react";

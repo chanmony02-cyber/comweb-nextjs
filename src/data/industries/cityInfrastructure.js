@@ -1,13 +1,12 @@
-﻿// src/data/industries/cityInfrastructure.js
-import { assetSrc } from "@/lib/assetSrc";
-const ci1 = "/images/industries/city-infrastructure/ci-project-1.webp";
-const ci2 = "/images/industries/city-infrastructure/ci-project-2.webp";
-const ci3 = "/images/industries/city-infrastructure/ci-project-3.webp";
-const cs1 = "/images/industries/city-infrastructure/ci-solution-1.webp";
-const cs2 = "/images/industries/city-infrastructure/ci-solution-2.webp";
-const cs3 = "/images/industries/city-infrastructure/ci-solution-3.webp";
-const cHero = "/images/industries/city-infrastructure/city-infrastructure-hero.webp";
-const cProblem = "/images/industries/city-infrastructure/city-infrastructure-problem.webp";
+// src/data/industries/cityInfrastructure.js
+import ci1 from "@/assets/images/industries/city-infrastructure/ci-project-1.jpg";
+import ci2 from "@/assets/images/industries/city-infrastructure/ci-project-2.jpg";
+import ci3 from "@/assets/images/industries/city-infrastructure/ci-project-3.jpg";
+import cs1 from "@/assets/images/industries/city-infrastructure/ci-solution-1.jpg";
+import cs2 from "@/assets/images/industries/city-infrastructure/ci-solution-2.jpg";
+import cs3 from "@/assets/images/industries/city-infrastructure/ci-solution-3.jpg";
+import cHero from "@/assets/images/industries/city-infrastructure/city-infrastructure-hero.jpg";
+import cProblem from "@/assets/images/industries/city-infrastructure/city-infrastructure-problem.jpg";
 import { ROUTES } from "@/config/routes";
 
 export const cityInfrastructureData = {
@@ -15,7 +14,7 @@ export const cityInfrastructureData = {
     title: "City Infrastructure",
     subtitle:
       "Powering urban development with reliable electrical systems for transportation, water, and public utilities.",
-    backgroundImage: assetSrc(cHero),
+    backgroundImage: cHero,
   },
   problem: {
     title: "We Understand Your Problem.",
@@ -24,7 +23,7 @@ export const cityInfrastructureData = {
       "Cities face challenges including aging utility networks, traffic congestion, and the need for sustainable energy solutions. These complexities require engineering expertise that bridges multiple disciplines.",
       "Our team specializes in designing and deploying integrated electrical solutions that keep cities running efficiently — from smart lighting and traffic systems to power distribution for critical public facilities.",
     ],
-    image: assetSrc(cProblem),
+    image: cProblem,
   },
   solutions: {
     label: "INDUSTRY SOLUTIONS",
@@ -35,17 +34,17 @@ export const cityInfrastructureData = {
       {
         id: 1,
         title: "Smart Street Lighting Systems",
-        image: assetSrc(cs1),
+        image: cs1,
       },
       {
         id: 2,
         title: "Underground Utility Networks",
-        image: assetSrc(cs2),
+        image: cs2,
       },
       {
         id: 3,
         title: "Traffic Management Solutions",
-        image: assetSrc(cs3),
+        image: cs3,
       },
     ],
   },
@@ -58,7 +57,7 @@ export const cityInfrastructureData = {
         title: "Metropolitan Interchange Upgrade",
         description:
           "Engineered and constructed a multi-level highway interchange serving over 150,000 vehicles daily, integrating smart traffic signals and energy-efficient LED lighting throughout the corridor.",
-        image: assetSrc(ci1),
+        image: ci1,
         href: ROUTES.PROJECT_DETAIL.replace(":id", 4),
       },
       {
@@ -66,7 +65,7 @@ export const cityInfrastructureData = {
         title: "Urban Water Treatment Facility",
         description:
           "Designed the complete electrical and control systems for a modern water treatment plant, ensuring 24/7 automated operations with redundant power supply and remote monitoring capabilities.",
-        image: assetSrc(ci2),
+        image: ci2,
         href: ROUTES.PROJECT_DETAIL.replace(":id", 5),
       },
       {
@@ -74,7 +73,7 @@ export const cityInfrastructureData = {
         title: "Public Transit Electrification",
         description:
           "Delivered end-to-end electrical infrastructure for a new urban rail line, including traction power substations, platform systems, and integrated safety and communication networks.",
-        image: assetSrc(ci3),
+        image: ci3,
         href: ROUTES.PROJECT_DETAIL.replace(":id", 6),
       },
     ],
@@ -85,5 +84,3 @@ export const cityInfrastructureData = {
       "Discover the advantages of partnering with us to modernize your infrastructure.",
   },
 };
-
-

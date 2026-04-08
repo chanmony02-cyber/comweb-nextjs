@@ -1,18 +1,17 @@
-﻿// src/data/services/allServices.js
+// src/data/services/allServices.js
 import { ROUTES } from "@/config/routes";
-import { assetSrc } from "@/lib/assetSrc";
-const heroBG = "/images/servicesImg/hero-bg.webp";
-const repairing = "/images/servicesImg/repairing.webp";
-const serviceConsultants = "/images/servicesImg/service-consultants.webp";
-const serviceInspections = "/images/servicesImg/service-inspections.webp";
-const serviceMaintenance = "/images/servicesImg/service-maintenance.webp";
+import heroBG from "@/assets/images/servicesImg/hero-bg.jpg";
+import repairing from "@/assets/images/servicesImg/repairing.jpg";
+import serviceConsultants from "@/assets/images/servicesImg/service-consultants.jpg";
+import serviceInspections from "@/assets/images/servicesImg/service-inspections.jpg";
+import serviceMaintenance from "@/assets/images/servicesImg/service-maintenance.jpg";
 
 export const allServicesData = {
   hero: {
     title: "Expert Services in Consultants, Maintenance, and Inspections",
     subtitle:
       "We provide top-notch services for all your electrical and electronic needs.",
-    backgroundImage: assetSrc(heroBG),
+    backgroundImage: heroBG,
   },
   services: {
     title: "Our Services",
@@ -23,7 +22,7 @@ export const allServicesData = {
         title: "Consultants",
         description:
           "Quick and reliable repairing services for all your electrical infrastructure needs.",
-        image: assetSrc(serviceConsultants),
+        image: serviceConsultants,
         href: ROUTES.CONSULTANTS,
       },
       {
@@ -31,7 +30,7 @@ export const allServicesData = {
         title: "Maintenance",
         description:
           "Expert advice tailored for your electrical and electronic system requirements.",
-        image: assetSrc(serviceInspections),
+        image: serviceInspections,
         href: ROUTES.MAINTENANCE,
       },
       {
@@ -39,14 +38,14 @@ export const allServicesData = {
         title: "Inspections",
         description:
           "Professional installation of electronic and electrical systems with precision.",
-        image: assetSrc(serviceMaintenance),
+        image: serviceMaintenance,
         href: ROUTES.INSPECTIONS,
       },
     ],
   },
   whyChoose: {
     title: "Why choose our services?",
-    image: assetSrc(repairing),
+    image: repairing,
     items: [
       {
         id: 1,
@@ -95,5 +94,3 @@ export const allServicesData = {
     },
   ],
 };
-
-

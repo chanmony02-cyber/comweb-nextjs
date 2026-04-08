@@ -1,6 +1,4 @@
-﻿"use client";
-
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Search, ChevronDown, Menu, X } from "lucide-react";
 import {
   Accordion,
@@ -9,29 +7,22 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import Image from "next/image";
+import { Link } from "react-router-dom";
 import { NavDropdown } from "@/components/common/Navbar/NavDropdown";
 import { TopBar } from "@/components/common/Navbar/TopBar";
-import { VHTLogo } from "@/data/shared/images";
-import { assetSrc } from "@/lib/assetSrc";
+import VHTLogo from "@/assets/images/VHT_Logo.png";
 import {
-  getCompanyDropdownItems,
-  getIndustriesDropdownItems,
-  getNavItems,
-  getProductsDropdownItems,
-  getServicesDropdownItems,
-} from "@/services/navigation";
+  companyDropdownItems,
+  industriesDropdownItems,
+  navItems,
+  productsDropdownItems,
+  servicesDropdownItems,
+} from "@/data/navigation/navigation";
 import { ROUTES } from "@/config/routes";
 import { UnderMaintenanceAlert } from "@/components/ui/UnderMaintenanceAlert";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const navItems = getNavItems();
-  const productsDropdownItems = getProductsDropdownItems();
-  const companyDropdownItems = getCompanyDropdownItems();
-  const servicesDropdownItems = getServicesDropdownItems();
-  const industriesDropdownItems = getIndustriesDropdownItems();
   const navLinkClassName =
     "flex items-center gap-1 text-md font-medium text-foreground hover:text-navy transition-colors";
 
@@ -51,15 +42,8 @@ export function Navbar() {
       <TopBar />
       <div className="border-b border-border">
         <div className="container flex items-center justify-between h-[var(--nav-height)]">
-          <Link href={ROUTES.HOME} className="flex items-center">
-            <Image
-              src={assetSrc(VHTLogo)}
-              alt="VHT Logo"
-              width={940}
-              height={940}
-              className="h-14 w-auto"
-              priority
-            />
+          <Link to={ROUTES.HOME} className="flex items-center">
+            <img src={VHTLogo} alt="VHT Logo" className="h-14 w-auto" />
           </Link>
 
           <nav className="hidden xl:flex text-lg items-center gap-8">
@@ -109,7 +93,7 @@ export function Navbar() {
                 return (
                   <Link
                     key={item.label}
-                    href={item.href}
+                    to={item.href}
                     className={navLinkClassName}
                   >
                     {item.label}
@@ -148,7 +132,7 @@ export function Navbar() {
               asChild
               className="rounded-full px-6 font-semibold border border-transparent hover:bg-white hover:text-slate-950 hover:border-primary"
             >
-              <Link href={ROUTES.CONTACT}>Get in Touch</Link>
+              <Link to={ROUTES.CONTACT}>Get in Touch</Link>
             </Button>
           </div>
 
@@ -187,7 +171,7 @@ export function Navbar() {
                           {productsDropdownItems.map((dropdownItem) => (
                             <Link
                               key={dropdownItem.label}
-                              href={dropdownItem.href}
+                              to={dropdownItem.href}
                               onClick={() => setMobileOpen(false)}
                               className="rounded-lg px-4 py-2 text-sm font-medium text-foreground hover:bg-muted/60 hover:text-navy transition-colors"
                             >
@@ -218,7 +202,7 @@ export function Navbar() {
                           {companyDropdownItems.map((dropdownItem) => (
                             <Link
                               key={dropdownItem.label}
-                              href={dropdownItem.href}
+                              to={dropdownItem.href}
                               onClick={() => setMobileOpen(false)}
                               className="rounded-lg px-4 py-2 text-sm font-medium text-foreground hover:bg-muted/60 hover:text-navy transition-colors"
                             >
@@ -251,7 +235,7 @@ export function Navbar() {
                           {servicesDropdownItems.map((dropdownItem) => (
                             <Link
                               key={dropdownItem.label}
-                              href={dropdownItem.href}
+                              to={dropdownItem.href}
                               onClick={() => setMobileOpen(false)}
                               className="rounded-lg px-4 py-2 text-sm font-medium text-foreground hover:bg-muted/60 hover:text-navy transition-colors"
                             >
@@ -284,7 +268,7 @@ export function Navbar() {
                           {industriesDropdownItems.map((dropdownItem) => (
                             <Link
                               key={dropdownItem.label}
-                              href={dropdownItem.href}
+                              to={dropdownItem.href}
                               onClick={() => setMobileOpen(false)}
                               className="rounded-lg px-4 py-2 text-sm font-medium text-foreground hover:bg-muted/60 hover:text-navy transition-colors"
                             >
@@ -302,7 +286,7 @@ export function Navbar() {
                 return (
                   <Link
                     key={item.label}
-                    href={item.href}
+                    to={item.href}
                     className="flex items-center justify-between py-3 text-sm font-medium text-foreground border-b border-border/50"
                     onClick={() => setMobileOpen(false)}
                   >
@@ -329,7 +313,7 @@ export function Navbar() {
             })}
             <div className="mt-4">
               <Button asChild className="w-full rounded-full font-semibold">
-                <Link href={ROUTES.CONTACT} onClick={() => setMobileOpen(false)}>
+                <Link to={ROUTES.CONTACT} onClick={() => setMobileOpen(false)}>
                   Get in Touch
                 </Link>
               </Button>

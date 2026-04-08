@@ -1,26 +1,25 @@
-﻿import { assetSrc } from "@/lib/assetSrc";
-const productCircuitBreaker = "/images/products/product-circuit-breaker.webp";
-const productCapacitor = "/images/products/product-capacitor.webp";
-const productCurrentTransformer = "/images/products/product-current-transformer.webp";
-const productFuse = "/images/products/product-fuse.webp";
-const productGrounding = "/images/products/product-grounding.webp";
-const productPanelBoard = "/images/products/product-panel-board.webp";
-const productSurgeArrester = "/images/products/product-surge-arrester.webp";
-const productTransformer = "/images/products/product-transformer.webp";
+import productCircuitBreaker from "@/assets/images/products/product-circuit-breaker.jpg";
+import productCapacitor from "@/assets/images/products/product-capacitor.jpg";
+import productCurrentTransformer from "@/assets/images/products/product-current-transformer.jpg";
+import productFuse from "@/assets/images/products/product-fuse.jpg";
+import productGrounding from "@/assets/images/products/product-grounding.jpg";
+import productPanelBoard from "@/assets/images/products/product-panel-board.jpg";
+import productSurgeArrester from "@/assets/images/products/product-surge-arrester.jpg";
+import productTransformer from "@/assets/images/products/product-transformer.jpg";
 
 export const products = [
   {
     id: 1,
     name: "Circuit Breaker",
     category: "LV",
-    image: assetSrc(productCircuitBreaker),
+    image: productCircuitBreaker,
     images: [
-      assetSrc(productCircuitBreaker),
-      assetSrc(productFuse),
-      assetSrc(productCircuitBreaker),
-      assetSrc(productSurgeArrester),
-      assetSrc(productFuse),
-      assetSrc(productFuse),
+      productCircuitBreaker,
+      productFuse,
+      productCircuitBreaker,
+      productSurgeArrester,
+      productFuse,
+      productFuse,
     ],
     description:
       "Protects low-voltage circuits from overloads and short circuits.",
@@ -56,8 +55,8 @@ export const products = [
     id: 2,
     name: "Fuse Link",
     category: "LV",
-    image: assetSrc(productFuse),
-    images: [assetSrc(productFuse), assetSrc(productSurgeArrester), assetSrc(productFuse)],
+    image: productFuse,
+    images: [productFuse, productSurgeArrester, productFuse],
     description: "Fast-acting fuse links for reliable LV protection.",
     features: [
       "Fast-acting response for overload protection",
@@ -79,12 +78,8 @@ export const products = [
     id: 3,
     name: "Current Transformer",
     category: "MV",
-    image: assetSrc(productCurrentTransformer),
-    images: [
-      assetSrc(productCurrentTransformer),
-      assetSrc(productSurgeArrester),
-      assetSrc(productFuse),
-    ],
+    image: productCurrentTransformer,
+    images: [productCurrentTransformer, productSurgeArrester, productFuse],
     description: "Accurate measurement and protection for MV systems.",
     features: [
       "High accuracy class measurement",
@@ -106,8 +101,8 @@ export const products = [
     id: 4,
     name: "Panel Board",
     category: "LV",
-    image: assetSrc(productPanelBoard),
-    images: [assetSrc(productPanelBoard), assetSrc(productSurgeArrester), assetSrc(productFuse)],
+    image: productPanelBoard,
+    images: [productPanelBoard, productSurgeArrester, productFuse],
     description: "Modular LV distribution panels for safe load management.",
     features: [
       "Modular design for easy expansion",
@@ -129,8 +124,8 @@ export const products = [
     id: 5,
     name: "Distribution Transformer",
     category: "MV",
-    image: assetSrc(productTransformer),
-    images: [assetSrc(productTransformer), assetSrc(productSurgeArrester), assetSrc(productFuse)],
+    image: productTransformer,
+    images: [productTransformer, productSurgeArrester, productFuse],
     description: "Efficient MV/LV power distribution for utility networks.",
     features: [
       "ONAN cooling for reliable operation",
@@ -152,8 +147,8 @@ export const products = [
     id: 6,
     name: "Surge Arrester",
     category: "MV",
-    image: assetSrc(productSurgeArrester),
-    images: [assetSrc(productSurgeArrester)],
+    image: productSurgeArrester,
+    images: [productSurgeArrester],
     description: "Protects MV equipment from lightning and switching surges.",
     features: [
       "Polymer housing for lightweight installation",
@@ -175,8 +170,8 @@ export const products = [
     id: 7,
     name: "Capacitor Bank",
     category: "MV",
-    image: assetSrc(productCapacitor),
-    images: [assetSrc(productCapacitor)],
+    image: productCapacitor,
+    images: [productCapacitor],
     description: "Power factor correction for MV networks.",
     features: [
       "Automatic switching controller included",
@@ -198,8 +193,8 @@ export const products = [
     id: 8,
     name: "Grounding System",
     category: "LV",
-    image: assetSrc(productGrounding),
-    images: [assetSrc(productGrounding)],
+    image: productGrounding,
+    images: [productGrounding],
     description: "Reliable earthing solution for LV installations.",
     features: [
       "Copper-bonded steel rod construction",
@@ -221,8 +216,8 @@ export const products = [
     id: 9,
     name: "Grounding System",
     category: "LV",
-    image: assetSrc(productGrounding),
-    images: [assetSrc(productGrounding)],
+    image: productGrounding,
+    images: [productGrounding],
     description: "Reliable earthing solution for LV installations.",
     features: [
       "Copper-bonded steel rod construction",
@@ -244,8 +239,8 @@ export const products = [
     id: 10,
     name: "Grounding System",
     category: "LV",
-    image: assetSrc(productGrounding),
-    images: [assetSrc(productGrounding)],
+    image: productGrounding,
+    images: [productGrounding],
     description: "Reliable earthing solution for LV installations.",
     features: [
       "Copper-bonded steel rod construction",
@@ -267,8 +262,8 @@ export const products = [
     id: 11,
     name: "Capacitor Bank",
     category: "MV",
-    image: assetSrc(productCapacitor),
-    images: [assetSrc(productCapacitor)],
+    image: productCapacitor,
+    images: [productCapacitor],
     description: "Power factor correction for MV networks.",
     features: [
       "Automatic switching controller included",
@@ -290,8 +285,8 @@ export const products = [
     id: 12,
     name: "Capacitor Bank",
     category: "MV",
-    image: assetSrc(productCapacitor),
-    images: [assetSrc(productCapacitor)],
+    image: productCapacitor,
+    images: [productCapacitor],
     description: "Power factor correction for MV networks.",
     features: [
       "Automatic switching controller included",
@@ -313,8 +308,8 @@ export const products = [
     id: 13,
     name: "Fuse Link",
     category: "LV",
-    image: assetSrc(productFuse),
-    images: [assetSrc(productFuse)],
+    image: productFuse,
+    images: [productFuse],
     description: "Fast-acting fuse links for reliable LV protection.",
     features: [
       "Fast-acting response for overload protection",
@@ -336,8 +331,8 @@ export const products = [
     id: 14,
     name: "Fuse Link",
     category: "LV",
-    image: assetSrc(productFuse),
-    images: [assetSrc(productFuse)],
+    image: productFuse,
+    images: [productFuse],
     description: "Fast-acting fuse links for reliable LV protection.",
     features: [
       "Fast-acting response for overload protection",
@@ -359,8 +354,8 @@ export const products = [
     id: 15,
     name: "Fuse Link",
     category: "LV",
-    image: assetSrc(productFuse),
-    images: [assetSrc(productFuse)],
+    image: productFuse,
+    images: [productFuse],
     description: "Fast-acting fuse links for reliable LV protection.",
     features: [
       "Fast-acting response for overload protection",
@@ -379,5 +374,3 @@ export const products = [
     },
   },
 ];
-
-

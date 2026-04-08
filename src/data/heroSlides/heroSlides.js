@@ -1,7 +1,6 @@
-﻿// src/data/heroSlides/heroSlides.js
+// src/data/heroSlides/heroSlides.js
 import { ROUTES } from "@/config/routes";
-import { assetSrc } from "@/lib/assetSrc";
-const gridImage = "/images/herosection/Grid.webp";
+import hero1 from "@/assets/images/heroSections/companyHero1.png";
 
 export const heroSlides = [
   {
@@ -18,9 +17,8 @@ export const heroSlides = [
       },
       { label: "Contact Us", href: ROUTES.CONTACT, variant: "outline" },
     ],
-    image:
-      "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1600&q=80&fit=crop",
-    overlay: "from-primary/85 via-primary/55 to-accent/25",
+    image: hero1,
+    overlay: "from-primary/5 via-primary/20 to-accent/5",
   },
   {
     id: 2,
@@ -32,15 +30,24 @@ export const heroSlides = [
       { label: "About Us", href: ROUTES.HOME, variant: "primary" },
       { label: "Contact Us", href: ROUTES.CONTACT, variant: "outline" },
     ],
-    image: assetSrc(gridImage),
+    image:
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80&fit=crop",
     overlay: "from-primary/85 via-primary/60 to-accent/25",
   },
   {
     id: 3,
-    eyebrow: "POWER DISTRIBUTION",
-    title: "RELIABLE GRID SOLUTIONS",
+    variant: "bubble-network",
+    eyebrow: "VH Technology",
+    title: "CORE VALUES",
     description:
-      "Building resilient power distribution networks that ensure uninterrupted electricity supply to communities and industries across the nation.",
+      "Our products are the building blocks of digital infrastructure, engineered to provide:",
+    bubbles: [
+      "Enhancing system reliability",
+      "Improving operational efficiency",
+      "Strengthening resiliency",
+      "Ensuring safety",
+      "Elevating customer engagement and service quality",
+    ],
     buttons: [
       {
         label: "Explore Solutions",
@@ -53,4 +60,3 @@ export const heroSlides = [
     overlay: "from-primary/80 via-primary/58 to-accent/35",
   },
 ];
-
